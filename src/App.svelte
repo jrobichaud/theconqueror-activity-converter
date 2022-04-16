@@ -6,8 +6,8 @@
     import { Button } from 'svelma'
 
     const units = [
-        {value: "metric", label: "Metric", multiplier: 1},
-        {value: "imperial", label: "Imperial", multiplier: 1.60934},
+        {value: "metric", label: "Metric", multiplier: 1, unit: "km"},
+        {value: "imperial", label: "Imperial", multiplier: 1.60934, unit: "miles"},
     ]
     export let duration;
     const conversions = [
@@ -127,7 +127,7 @@
         <AutoComplete items="{conversions}" bind:selectedItem="{selectedActivity}" labelFieldName="name" onBlur={() => durationInput.focus()} lock={true} />
         <label>Duration (minutes)</label>
         <input type="text" bind:this={durationInput} bind:value={duration} min=0 />
-        <label>Converted (km)</label>
+        <label>Converted ({selectedUnit.unit})</label>
             <input type="text" readonly value={convertedValue} />
     </form>
     <Button on:click={copy}>copy</Button>
