@@ -134,7 +134,7 @@
     <div id="clipboard"></div>
 
     <footer>
-        <span>Official The Conqueror <a href="https://help.theconqueror.events/en/articles/2027324-activity-conversion-chart">Activity conversion chart</a></span>
+        <span>The Conqueror official activity conversion chart <a href="https://help.theconqueror.events/en/articles/2027324-activity-conversion-chart">can be found here</a></span>
         <p>This site is not affiliated with The Conqueror</p>
     </footer>
 </main>
