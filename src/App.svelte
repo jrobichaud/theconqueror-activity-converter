@@ -3,7 +3,8 @@
     import AutoComplete from "simple-svelte-autocomplete"
     import Select from 'svelte-select';
     import CopyClipBoard from './CopyClipboard.svelte';
-    import {Button} from 'svelma'
+    import {Button} from 'svelma';
+    import {writable} from "svelte/store";
 
     const units = [
         {value: "metric", label: "Metric", multiplier: 1, unit: "km", unit_details: "details_km"},
@@ -100,8 +101,13 @@
         {id: 87, name: "Wrestling", miles: 0.73, km: 1.17},
         {id: 88, name: "Yoga", miles: 0.23, km: 0.36},
     ]
+    const storedUnit = localStorage.getItem("unit");
+    let selectedUnit = writable(units.find(unit => unit.unit === storedUnit )??units[0]);
+    selectedUnit.subscribe(unit => {
+        localStorage.setItem("unit", unit.unit);
+    });
 
-    let selectedUnit = units[0];
+
     let selectedActivity
     let durationInput;
     $: convertedValue = selectedActivity && duration ? Math.round(duration * selectedActivity[selectedUnit.unit] * 0.1 * 100) / 100 : 0;
@@ -122,7 +128,7 @@
     <h2>Activity Converter</h2>
     <form class="content">
         <label>Unit</label>
-        <Select items={units} bind:value={selectedUnit} isClearable={false}/>
+        <Select items={units} bind:value={$selectedUnit} isClearable={false}/>
         <label>Activity</label>
         <AutoComplete items="{conversions}" bind:selectedItem="{selectedActivity}" onBlur={() => durationInput.focus()}
                       labelFieldName="name"
