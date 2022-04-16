@@ -110,7 +110,7 @@
 
     let selectedActivity
     let durationInput;
-    $: convertedValue = selectedActivity && duration ? Math.round(duration * selectedActivity[selectedUnit.unit] * 0.1 * 100) / 100 : 0;
+    $: convertedValue = selectedActivity && duration ? Math.round(duration * selectedActivity[$selectedUnit.unit] * 0.1 * 100) / 100 : 0;
 
     const copy = () => {
         const app = new CopyClipBoard({
@@ -132,16 +132,16 @@
         <label>Activity</label>
         <AutoComplete items="{conversions}" bind:selectedItem="{selectedActivity}" onBlur={() => durationInput.focus()}
                       labelFieldName="name"
-                      keywordsFunction={(item) => item.name + (item[selectedUnit.unit_details]??"")}
+                      keywordsFunction={(item) => item.name + (item[$selectedUnit.unit_details]??"")}
                       lock={true}>
             <div slot="item" let:item={item} let:label={label}>
                 {@html label}
-                <span>{item[selectedUnit.unit_details] ?? ""}</span>
+                <span>{item[$selectedUnit.unit_details] ?? ""}</span>
             </div>
         </AutoComplete>
         <label>Duration (minutes)</label>
         <input type="text" bind:this={durationInput} bind:value={duration} min=0/>
-        <label>Converted ({selectedUnit.unit})</label>
+        <label>Converted ({$selectedUnit.unit})</label>
         <input type="text" readonly value={convertedValue}/>
     </form>
     <Button on:click={copy}>copy</Button>
