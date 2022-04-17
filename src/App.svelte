@@ -11,7 +11,7 @@
         {value: "imperial", label: "Imperial", multiplier: 1.60934, unit: "miles", unit_details: "details_miles"},
     ]
     export let duration;
-    const conversions = [
+    const activities = [
         {id: 1, name: "Aerobics, low intensity", miles: 0.64, km: 1.02},
         {id: 2, name: "Aerobics, high intensity", miles: 0.91, km: 1.46},
         {id: 3, name: "Aerobics, step", miles: 0.77, km: 1.23},
@@ -107,10 +107,14 @@
         localStorage.setItem("unit", unit.unit);
     });
 
+    const storedActivity = localStorage.getItem("activity");
+    let selectedActivity = writable(activities.find(activity => activity.id + "" === storedActivity )??undefined);
+    selectedActivity.subscribe((activity) => {
+        activity && localStorage.setItem("activity", activity.id);
+    });
 
-    let selectedActivity
     let durationInput;
-    $: convertedValue = selectedActivity && duration ? Math.round(duration * selectedActivity[$selectedUnit.unit] * 0.1 * 100) / 100 : 0;
+    $: convertedValue = $selectedActivity && duration ? Math.round(duration * $selectedActivity[$selectedUnit.unit] * 0.1 * 100) / 100 : 0;
 
     const copy = () => {
         const app = new CopyClipBoard({
@@ -130,7 +134,7 @@
         <label>Unit</label>
         <Select items={units} bind:value={$selectedUnit} isClearable={false}/>
         <label>Activity</label>
-        <AutoComplete items="{conversions}" bind:selectedItem="{selectedActivity}" onBlur={() => durationInput.focus()}
+        <AutoComplete items="{activities}" bind:selectedItem="{$selectedActivity}" onBlur={() => durationInput.focus()}}
                       labelFieldName="name"
                       keywordsFunction={(item) => item.name + (item[$selectedUnit.unit_details]??"")}
                       lock={true}>
