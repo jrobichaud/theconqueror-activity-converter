@@ -128,8 +128,8 @@
 </script>
 
 <main>
-    <h1>The Conqueror</h1>
-    <h2>Activity Converter</h2>
+    <h1>The Converter</h1>
+    <h2>Unofficial The Conqueror Activity Converter</h2>
     <form class="content">
         <label>Unit</label>
         <Select items={units} bind:value={$selectedUnit} isClearable={false}/>
@@ -152,7 +152,7 @@
     <div id="clipboard"></div>
 
     <footer>
-        <span>The Conqueror official activity conversion chart <a
+        <span>Official activity conversion chart <a
                 href="https://help.theconqueror.events/en/articles/2027324-activity-conversion-chart">can be found here</a></span>
         <p>This site is not affiliated with The Conqueror</p>
     </footer>
@@ -189,7 +189,7 @@
     h2 {
         color: white;
         background-color: black;
-        font-size: 2em;
+        font-size: 1em;
         font-weight: 100;
         padding-bottom: 10px;
     }
