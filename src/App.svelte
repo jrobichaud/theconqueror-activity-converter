@@ -152,7 +152,7 @@
         <input type="text" readonly value={convertedValue}/>
     </form>
 
-    <Button on:click={copy} disabled={!isValid}>copy</Button>
+    <Button on:click={copy} disabled={!isValid} iconPack="far" iconLeft="copy">copy</Button>
     <div id="clipboard"></div>
 
     <footer>
