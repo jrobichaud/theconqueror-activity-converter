@@ -151,6 +151,7 @@
     </form>
     <Button on:click={copy}>copy</Button>
     <div id="clipboard"></div>
+
     <footer>
         <span>Official activity conversion chart <a
                 href="https://help.theconqueror.events/en/articles/2027324-activity-conversion-chart">can be found here</a></span>
