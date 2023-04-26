@@ -126,6 +126,7 @@
             props: {name: convertedValue},
         });
         app.$destroy();
+        Toast.create({ message: 'Copied to clipboard!', type: 'is-success', position: 'is-top', duration: 2000 });
     }
 
 
