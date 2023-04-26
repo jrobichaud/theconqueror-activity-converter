@@ -127,6 +127,11 @@
         Toast.create({ message: 'Copied to clipboard!', type: 'is-success', position: 'is-top', duration: 2000 });
     }
 
+    function handleFocus(event) {
+        setTimeout(function() {
+            durationInput.select()
+        }, 0);
+    }
 
 </script>
 
@@ -137,8 +142,11 @@
         <label>Unit</label>
         <Select items={units} bind:value={$selectedUnit} isClearable={false}/>
         <label>Activity</label>
-        <AutoComplete items="{activities}" bind:selectedItem="{$selectedActivity}" onBlur={() => durationInput.focus()}}
+        <AutoComplete items="{activities}"
+                      bind:selectedItem="{$selectedActivity}"
+                      onBlur={() => durationInput.focus()}
                       labelFieldName="name"
+                      hideArrow="{true}"
                       keywordsFunction={(item) => item.name + (item[$selectedUnit.unit_details]??"")}
                       lock={true}>
             <div slot="item" let:item={item} let:label={label}>
@@ -147,7 +155,7 @@
             </div>
         </AutoComplete>
         <label>Duration (minutes)</label>
-        <input type="number" bind:this={durationInput} bind:value={duration} min=0/>
+        <input on:focus="{handleFocus}" type="number" bind:this={durationInput} bind:value={duration} min=0/>
         <label>Converted ({$selectedUnit.unit})</label>
         <input type="text" readonly value={convertedValue}/>
     </form>

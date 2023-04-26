@@ -61,3 +61,8 @@ button:not(:disabled):active {
 button:focus {
 	border-color: #666;
 }
+
+.autocomplete::after {
+	display: none !important;
+	content: none !important;
+}
