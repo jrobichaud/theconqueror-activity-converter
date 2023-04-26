@@ -114,13 +114,11 @@
     });
 
     let durationInput;
+    let isValid;
     $: convertedValue = $selectedActivity && duration ? Math.round(duration * $selectedActivity[$selectedUnit.unit] * 0.1 * 100) / 100 : 0;
+    $: duration, isValid = duration > 0;
 
     const copy = () => {
-        if (isNaN(convertedValue)) {
-            Toast.create({ message: 'Invalid duration value!', type: 'is-danger', position: 'is-top', duration: 2000 });
-            return;
-        }
         const app = new CopyClipBoard({
             target: document.getElementById('clipboard'),
             props: {name: convertedValue},
@@ -149,11 +147,12 @@
             </div>
         </AutoComplete>
         <label>Duration (minutes)</label>
-        <input type="text" bind:this={durationInput} bind:value={duration} min=0/>
+        <input type="number" bind:this={durationInput} bind:value={duration} min=0/>
         <label>Converted ({$selectedUnit.unit})</label>
         <input type="text" readonly value={convertedValue}/>
     </form>
-    <Button on:click={copy}>copy</Button>
+
+    <Button on:click={copy} disabled={!isValid}>copy</Button>
     <div id="clipboard"></div>
 
     <footer>
