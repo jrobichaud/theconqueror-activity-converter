@@ -117,12 +117,15 @@
     $: convertedValue = $selectedActivity && duration ? Math.round(duration * $selectedActivity[$selectedUnit.unit] * 0.1 * 100) / 100 : 0;
 
     const copy = () => {
+        if (isNaN(convertedValue)) {
+            Toast.create({ message: 'Invalid duration value!', type: 'is-danger', position: 'is-top', duration: 2000 });
+            return;
+        }
         const app = new CopyClipBoard({
             target: document.getElementById('clipboard'),
             props: {name: convertedValue},
         });
         app.$destroy();
-        Toast.create({ message: 'Copied to clipboard!', type: 'is-success', position: 'is-top', duration: 2000 });
     }
 
 
