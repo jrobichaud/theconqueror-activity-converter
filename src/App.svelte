@@ -3,7 +3,7 @@
     import AutoComplete from "simple-svelte-autocomplete"
     import Select from 'svelte-select';
     import CopyClipBoard from './CopyClipboard.svelte';
-    import {Button} from 'svelma';
+    import {Button, Toast} from 'svelma';
     import {writable} from "svelte/store";
 
     const units = [
@@ -122,6 +122,7 @@
             props: {name: convertedValue},
         });
         app.$destroy();
+        Toast.create({ message: 'Copied to clipboard!', type: 'is-success', position: 'is-top', duration: 2000 });
     }
 
 
