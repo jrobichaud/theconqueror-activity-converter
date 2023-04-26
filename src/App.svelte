@@ -3,8 +3,9 @@
     import AutoComplete from "simple-svelte-autocomplete"
     import Select from 'svelte-select';
     import CopyClipBoard from './CopyClipboard.svelte';
-    import {Button} from 'svelma';
+    import {Button, Toast} from 'svelma';
     import {writable} from "svelte/store";
+    import CopyClipboard from './CopyClipboard.svelte';
 
     const units = [
         {value: "metric", label: "Metric", multiplier: 1, unit: "km", unit_details: "details_km"},
@@ -122,6 +123,7 @@
             props: {name: convertedValue},
         });
         app.$destroy();
+        Toast.create({ message: 'Copied to clipboard!', type: 'is-success', position: 'is-top', duration: 2000 });
     }
 
 
@@ -150,7 +152,6 @@
     </form>
     <Button on:click={copy}>copy</Button>
     <div id="clipboard"></div>
-
     <footer>
         <span>Official activity conversion chart <a
                 href="https://help.theconqueror.events/en/articles/2027324-activity-conversion-chart">can be found here</a></span>
