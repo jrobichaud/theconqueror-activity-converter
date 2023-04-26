@@ -5,7 +5,6 @@
     import CopyClipBoard from './CopyClipboard.svelte';
     import {Button, Toast} from 'svelma';
     import {writable} from "svelte/store";
-    import CopyClipboard from './CopyClipboard.svelte';
 
     const units = [
         {value: "metric", label: "Metric", multiplier: 1, unit: "km", unit_details: "details_km"},
